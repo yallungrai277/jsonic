@@ -6,7 +6,8 @@
     "herd_mcp": false,
     "mcp": true,
     "packages": [
-        "laravel/fortify"
+        "laravel/fortify",
+        "laravel/ai"
     ],
     "sail": false,
     "skills": [
@@ -14,6 +15,7 @@
         "pest-testing",
         "inertia-vue-development",
         "tailwindcss-development",
+        "developing-with-ai-sdk",
         "developing-with-fortify"
     ]
 }
