@@ -113,6 +113,20 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'testing_db' => [
+            'driver' => 'pgsql',
+            'url' => env('TESTING_DB_URL'),
+            'host' => env('TESTING_DB_HOST', '127.0.0.1'),
+            'port' => env('TESTING_DB_PORT', '5432'),
+            'database' => env('TESTING_DB_DATABASE', 'laravel'),
+            'username' => env('TESTING_DB_USERNAME', 'root'),
+            'password' => env('TESTING_DB_PASSWORD', ''),
+            'charset' => env('TESTING_DB_CHARSET', 'utf8'),
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'search_path' => 'public',
+            'sslmode' => env('TESTING_DB_SSLMODE', 'prefer'),
+        ],
     ],
 
     /*
@@ -177,7 +191,5 @@ return [
             'backoff_base' => env('REDIS_BACKOFF_BASE', 100),
             'backoff_cap' => env('REDIS_BACKOFF_CAP', 1000),
         ],
-
     ],
-
 ];

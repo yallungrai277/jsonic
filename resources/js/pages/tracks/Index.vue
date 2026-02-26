@@ -1,46 +1,44 @@
 <script setup lang="ts">
 import { Head } from '@inertiajs/vue3';
+import Form from '@/components/tracks/Form.vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 import { index as appIndex } from '@/routes/app';
 import { type BreadcrumbItem } from '@/types';
-import PlaceholderPattern from '../../components/PlaceholderPattern.vue';
+
+// import { Button } from '@/components/ui/button';
+// import { Label } from '@/components/ui/label';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Audio',
+        title: 'Tracks',
         href: appIndex().url,
     },
 ];
 </script>
 
 <template>
-    <Head title="Audio" />
+    <Head title="Tracks" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
         <div
             class="flex h-full flex-1 flex-col gap-4 overflow-x-auto rounded-xl p-4"
         >
-            <div class="grid auto-rows-min gap-4 md:grid-cols-3">
+            <div class="grid auto-rows-min gap-4 md:grid-cols-2">
                 <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
+                    class="relative overflow-hidden rounded-xl border border-sidebar-border/70 p-4 dark:border-sidebar-border"
                 >
-                    <PlaceholderPattern />
+                    <Form />
                 </div>
                 <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
+                    class="relative overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
                 >
-                    <PlaceholderPattern />
-                </div>
-                <div
-                    class="relative aspect-video overflow-hidden rounded-xl border border-sidebar-border/70 dark:border-sidebar-border"
-                >
-                    <PlaceholderPattern />
+                    Upload an audio.
                 </div>
             </div>
             <div
                 class="relative min-h-[100vh] flex-1 rounded-xl border border-sidebar-border/70 md:min-h-min dark:border-sidebar-border"
             >
-                <PlaceholderPattern />
+                List goes here.
             </div>
         </div>
     </AppLayout>

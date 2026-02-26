@@ -14,7 +14,7 @@ import {
     SidebarMenuItem,
 } from '@/components/ui/sidebar';
 import { index as appIndex } from '@/routes/app';
-import { index as audioIndex } from "@/routes/audio";
+import { index as trackIndex } from '@/routes/tracks';
 import { type NavItem } from '@/types';
 import AppLogo from './AppLogo.vue';
 
@@ -25,10 +25,10 @@ const mainNavItems: NavItem[] = [
         icon: LayoutGrid,
     },
     {
-        title: 'Audio',
-        href: audioIndex(),
+        title: 'Tracks',
+        href: trackIndex(),
         icon: LayoutGrid,
-    }
+    },
 ];
 
 const footerNavItems: NavItem[] = [

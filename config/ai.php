@@ -19,7 +19,7 @@ return [
     'default_for_images' => 'gemini',
     'default_for_audio' => 'openai',
     'default_for_transcription' => 'openai',
-    'default_for_embeddings' => 'openai',
+    'default_for_embeddings' => env('DEFAULT_EMBEDDING_PROVIDER', 'ollama'),
     'default_for_reranking' => 'cohere',
 
     /*
@@ -35,7 +35,7 @@ return [
 
     'caching' => [
         'embeddings' => [
-            'cache' => false,
+            'cache' => true,
             'store' => env('CACHE_STORE', 'database'),
         ],
     ],
@@ -119,4 +119,17 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Embedding model map with dimensions, db column and model name.
+    |--------------------------------------------------------------------------
+    |
+    */
+    'embedding_models' => [
+        'ollama' => [
+            'dimensions' => env('DEFAULT_OLLAMA_EMBEDDING_DIMENSIONS', 768),
+            'column' => env('DEFAULT_OLLAMA_EMBEDDING_COLUMN', 'embedding_768'),
+            'model' => env('DEFAULT_OLLAMA_EMBEDDING_MODEL', 'nomic-embed-text:latest'),
+        ],
+    ],
 ];

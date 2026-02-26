@@ -13,7 +13,7 @@
 
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->in('Feature');
+    ->in('Feature', 'Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -40,8 +40,6 @@ expect()->extend('toBeOne', function () {
 | global functions to help you to reduce the number of lines of code in your test files.
 |
 */
-
-function something()
-{
-    // ..
+foreach (glob(__DIR__.DIRECTORY_SEPARATOR.'Helpers'.DIRECTORY_SEPARATOR.'*.php') as $file) {
+    require_once $file;
 }

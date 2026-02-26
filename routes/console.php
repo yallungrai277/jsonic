@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Foundation\Inspiring;
+use App\Console\Commands\IngestJokes;
 use Illuminate\Support\Facades\Artisan;
 
-Artisan::command('inspire', function () {
-    $this->comment(Inspiring::quote());
-})->purpose('Display an inspiring quote');
+// Artisan::command(IngestJokes::SIGNATURE, IngestJokes::class)
+//     ->purpose('Ingest jokes from public apis');
