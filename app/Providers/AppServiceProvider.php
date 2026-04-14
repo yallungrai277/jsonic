@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Contracts\ConversationStore;
+use App\Contracts\NavigationBuilder;
+use App\Services\Menu\NavigationMenuBuilder;
+use App\Stores\DatabaseConversationStore;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
@@ -25,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configureDefaults();
+        $this->registerAppBindings();
     }
 
     /**
@@ -51,5 +56,14 @@ class AppServiceProvider extends ServiceProvider
         Model::preventSilentlyDiscardingAttributes();
         Model::preventLazyLoading();
         Model::automaticallyEagerLoadRelationships();
+    }
+
+    /**
+     * Register application bindings.
+     */
+    protected function registerAppBindings(): void
+    {
+        $this->app->singleton(ConversationStore::class, fn () => new DatabaseConversationStore);
+        $this->app->singleton(NavigationBuilder::class, fn () => new NavigationMenuBuilder);
     }
 }

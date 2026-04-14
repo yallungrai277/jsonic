@@ -7,6 +7,7 @@ use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -25,11 +26,15 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (Throwable $e, Request $request) {
+            $status = $e->getCode() ?: 500;
             if ($request->expectsJson()) {
                 $errors = [
-                    'errors' => method_exists($e, 'errors') ? $e->errors() : null,
                     'message' => $e->getMessage() ?: 'Something went wrong.',
                 ];
+
+                if ($e instanceof ValidationException) {
+                    $errors['errors'] = $e->errors();
+                }
 
                 if (! app()->isProduction()) {
                     $errors = array_merge($errors, [
@@ -40,7 +45,9 @@ return Application::configure(basePath: dirname(__DIR__))
                     ]);
                 }
 
-                return response()->json($errors, $e->getCode() ? $e->getCode() : 500);
+                return response()->json($errors, $status);
             }
+
+            return null;
         });
     })->create();

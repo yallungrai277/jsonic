@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'jChat'),
 
     /*
     |--------------------------------------------------------------------------
@@ -123,4 +123,22 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Conversation greeting
+    |--------------------------------------------------------------------------
+    |
+    | Application greeting messages, show on new conversation page.
+    |
+    */
+    'conversation_greeting' => [
+        'Ready for a round of joke when you are',
+        'Hey there, your laughter quota is waiting!',
+        'Let’s sprinkle some fun today',
+        'Hiya, ready to giggle a little?',
+        'Ahoy, adventure in humor awaits!',
+        'Greetings, Shall we chase some chuckles?',
+        'Let’s turn this moment into a smile fest!',
+        'Well hello, are you in the mood for some laughs today?',
+    ],
 ];

@@ -1,20 +1,21 @@
 {
     "semi": true,
     "singleQuote": true,
+    "printWidth": 150,
+    "tabWidth": 4,
     "singleAttributePerLine": false,
     "htmlWhitespaceSensitivity": "css",
-    "printWidth": 80,
-    "plugins": [
-        "prettier-plugin-tailwindcss"
-    ],
-    "tailwindFunctions": [
-        "clsx",
-        "cn",
-        "cva"
-    ],
+    "vueIndentScriptAndStyle": false,
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "tailwindFunctions": ["clsx", "cn", "cva"],
     "tailwindStylesheet": "resources/css/app.css",
-    "tabWidth": 4,
     "overrides": [
+        {
+            "files": "*.vue",
+            "options": {
+                "parser": "vue"
+            }
+        },
         {
             "files": "**/*.yml",
             "options": {

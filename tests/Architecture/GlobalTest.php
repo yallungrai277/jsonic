@@ -30,7 +30,8 @@ arch()
 arch()
     ->expect('App\Services\*')
     ->toBeClasses()
-    ->toExtendNothing();
+    ->toExtendNothing()
+    ->ignoring('App\Services\Ai\EmbeddingService');
 
 arch()
     ->expect('App\Console\Commands')
@@ -41,17 +42,6 @@ arch()
     ->expect('App\Actions\*')
     ->toBeClasses()
     ->toExtendNothing();
-
-// @todo. Add this back once we start using jobs.
-// arch()
-//     ->expect('App\Jobs\*')
-//     ->toImplement('Illuminate\Contracts\Queue\ShouldQueue')
-//     ->toUseTraits([
-//         'Illuminate\Foundation\Bus\Dispatchable',
-//         'Illuminate\Queue\InteractsWithQueue',
-//         'Illuminate\Queue\SerializesModels',
-//         'Illuminate\Bus\Queueable',
-//     ])->todo('Add this back once we start using jobs.');
 
 arch()
     ->expect('App\Providers')

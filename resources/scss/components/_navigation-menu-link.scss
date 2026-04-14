@@ -1,0 +1,19 @@
+.nav-menu-link {
+    .dropdown-menu-trigger {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+
+    &:hover {
+        > .dropdown-menu-trigger {
+            opacity: 1;
+        }
+    }
+
+    // Sidebar collapsed.
+    [data-state='collapsed'] & {
+        > .dropdown-menu-trigger {
+            display: none;
+        }
+    }
+}

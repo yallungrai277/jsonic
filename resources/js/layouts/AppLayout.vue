@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Toast from '@/components/ui/toast/Toast.vue';
 import AppLayout from '@/layouts/app/AppSidebarLayout.vue';
 import type { BreadcrumbItem } from '@/types';
 
@@ -15,4 +16,5 @@ withDefaults(defineProps<Props>(), {
     <AppLayout :breadcrumbs="breadcrumbs">
         <slot />
     </AppLayout>
+    <Toast />
 </template>

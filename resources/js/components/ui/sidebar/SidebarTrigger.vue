@@ -3,6 +3,7 @@ import type { HTMLAttributes } from "vue"
 import { PanelLeftClose, PanelLeftOpen } from "lucide-vue-next"
 import { cn } from "@/lib/utils"
 import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useSidebar } from "./utils"
 
 const props = defineProps<{
@@ -13,16 +14,23 @@ const { isMobile, state, toggleSidebar } = useSidebar()
 </script>
 
 <template>
-  <Button
-    data-sidebar="trigger"
-    data-slot="sidebar-trigger"
-    variant="ghost"
-    size="icon"
-    :class="cn('h-7 w-7', props.class)"
-    @click="toggleSidebar"
-  >
-    <PanelLeftOpen v-if="isMobile || state === 'collapsed'" />
-    <PanelLeftClose v-else />
-    <span class="sr-only">Toggle Sidebar</span>
-  </Button>
+  <Tooltip>
+    <TooltipTrigger as-child>
+      <Button
+        data-sidebar="trigger"
+        data-slot="sidebar-trigger"
+        variant="ghost"
+        size="icon"
+        :class="cn('h-7 w-7', props.class)"
+        @click="toggleSidebar"
+      >
+        <PanelLeftOpen v-if="isMobile || state === 'collapsed'" />
+        <PanelLeftClose v-else />
+        <span class="sr-only">Toggle Sidebar</span>
+      </Button>
+    </TooltipTrigger>
+    <TooltipContent side="bottom" align="center">
+      Toggle Sidebar
+    </TooltipContent>
+  </Tooltip>
 </template>

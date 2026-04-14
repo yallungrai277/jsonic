@@ -1,7 +1,5 @@
 <?php
 
-use Laravel\Ai\Provider;
-
 return [
 
     /*
@@ -15,12 +13,20 @@ return [
     |
     */
 
-    'default' => 'openai',
+    'default' => env('DEFAULT_AI_PROVIDER', 'ollama'),
     'default_for_images' => 'gemini',
     'default_for_audio' => 'openai',
     'default_for_transcription' => 'openai',
     'default_for_embeddings' => env('DEFAULT_EMBEDDING_PROVIDER', 'ollama'),
     'default_for_reranking' => 'cohere',
+
+    /*
+    |--------------------------------------------------------------------------
+    | Default model for generic purposes such as conversation and stuff.
+    |--------------------------------------------------------------------------
+    |
+    */
+    'default_model' => env('DEFAULT_AI_MODEL', 'qwen2.5:3b'),
 
     /*
     |--------------------------------------------------------------------------
@@ -96,6 +102,18 @@ return [
             'driver' => 'ollama',
             'key' => env('OLLAMA_API_KEY', ''),
             'url' => env('OLLAMA_BASE_URL', 'http://localhost:11434'),
+            'models' => [
+                'text' => [
+                    'default' => env('DEFAULT_TEXT_MODEL', env('DEFAULT_OLLAMA_TEXT_MODEL', 'qwen2.5:3b')),
+                    'cheapest' => env('DEFAULT_TEXT_MODEL_CHEAPEST', env('DEFAULT_OLLAMA_TEXT_MODEL_CHEAPEST')),
+                    'smartest' => env('DEFAULT_TEXT_MODEL_SMARTEST', env('DEFAULT_OLLAMA_TEXT_MODEL_SMARTEST')),
+                ],
+                'embeddings' => [
+                    'default' => env('DEFAULT_EMBEDDING_MODEL', env('DEFAULT_OLLAMA_EMBEDDING_MODEL', 'nomic-embed-text:latest')),
+                    'dimensions' => env('DEFAULT_EMBEDDING_DIMENSIONS', env('DEFAULT_OLLAMA_EMBEDDING_DIMENSIONS', 768)),
+                    'db_column' => env('DEFAULT_EMBEDDING_COLUMN', env('DEFAULT_OLLAMA_EMBEDDING_COLUMN', 'embedding_768')),
+                ],
+            ],
         ],
 
         'openai' => [
@@ -116,20 +134,6 @@ return [
         'xai' => [
             'driver' => 'xai',
             'key' => env('XAI_API_KEY'),
-        ],
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Embedding model map with dimensions, db column and model name.
-    |--------------------------------------------------------------------------
-    |
-    */
-    'embedding_models' => [
-        'ollama' => [
-            'dimensions' => env('DEFAULT_OLLAMA_EMBEDDING_DIMENSIONS', 768),
-            'column' => env('DEFAULT_OLLAMA_EMBEDDING_COLUMN', 'embedding_768'),
-            'model' => env('DEFAULT_OLLAMA_EMBEDDING_MODEL', 'nomic-embed-text:latest'),
         ],
     ],
 ];

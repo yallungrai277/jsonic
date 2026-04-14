@@ -4,7 +4,7 @@ namespace App\Models;
 
 use App\Enums\Joke\JokeStatus;
 use App\Enums\Joke\JokeType;
-use App\Services\Embedding\EmbeddingService;
+use App\Services\Ai\EmbeddingService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

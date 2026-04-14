@@ -42,7 +42,7 @@ readonly class JokeIngestDTO
         return new self(
             $joke->source_id,
             $joke->source,
-            JokeType::from($joke->type),
+            $joke->type,
             new JokeContentDTO($joke->content),
             $joke->category,
         );

@@ -6,7 +6,7 @@ use App\Dto\Joke\JokeIngestDTO;
 use App\Enums\Joke\JokeStatus;
 use App\Enums\Joke\JokeType;
 use App\Models\Joke as JokeModel;
-use App\Services\Embedding\EmbeddingService;
+use App\Services\Ai\EmbeddingService;
 use Laravel\Ai\Responses\Data\Meta;
 use Laravel\Ai\Responses\EmbeddingsResponse;
 use Laravel\Ai\Responses\QueuedEmbeddingsResponse;

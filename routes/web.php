@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Conversation\ConversationController;
 use App\Http\Controllers\Settings\PasswordController;
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Settings\TwoFactorAuthenticationController;
@@ -28,12 +29,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('settings/password', [PasswordController::class, 'update'])
         ->middleware('throttle:6,1')
         ->name('user-password.update');
-    Route::get('settings/appearance', function () {
-        return Inertia::render('settings/Appearance');
-    })->name('appearance.edit');
     Route::get('settings/two-factor', [TwoFactorAuthenticationController::class, 'show'])
         ->name('two-factor.show');
 });
 
-// App routes [dash routes].
-require __DIR__.'/app.php';
+Route::middleware('auth')->group(function () {
+    Route::resource('conversation', ConversationController::class);
+    Route::get('conversation/{conversation}/stream', [ConversationController::class, 'stream'])->name('conversation.stream');
+    Route::delete('conversation/{conversation}/prompt', [ConversationController::class, 'clearPrompt'])->name('conversation.prompt.clear');
+});

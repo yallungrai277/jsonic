@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Joke;
 use App\Models\JokeEmbeddings;
-use App\Services\Embedding\EmbeddingService;
+use App\Services\Ai\EmbeddingService;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -28,7 +28,7 @@ class JokeEmbeddingsFactory extends Factory
     {
         return [
             'joke_id' => Joke::factory(),
-            EmbeddingService::getColumn() => json_encode(array_fill(0, EmbeddingService::getDimension(), 0.1)),
+            EmbeddingService::getColumn() => json_encode(array_fill(0, EmbeddingService::getDimensions(), 0.1)),
             'model' => EmbeddingService::getModel(),
         ];
     }

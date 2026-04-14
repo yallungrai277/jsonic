@@ -9,3 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export function toUrl(href: NonNullable<InertiaLinkProps['href']>) {
     return typeof href === 'string' ? href : href?.url;
 }
+
+export function generateUniqueId() {
+    return Date.now().toString(36) + '-' + Math.random().toString(36).substring(2, 10);
+}

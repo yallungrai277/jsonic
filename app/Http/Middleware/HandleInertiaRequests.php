@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Contracts\NavigationBuilder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Middleware;
 
 class HandleInertiaRequests extends Middleware
@@ -41,7 +43,12 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'flash' => [
+                'success' => $request->session()->get('success'),
+                'error' => $request->session()->get('error'),
+            ],
             'sidebarOpen' => ! $request->hasCookie('sidebar_state') || $request->cookie('sidebar_state') === 'true',
+            'navMenus' => Auth::check() ? app(NavigationBuilder::class)->build(config('nav', []))->get() : [],
         ];
     }
 }

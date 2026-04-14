@@ -6,7 +6,7 @@ use App\Dto\Joke\JokeIngestDTO;
 use App\Enums\Joke\JokeStatus;
 use App\Enums\Joke\JokeType;
 use App\Models\Joke as JokeModel;
-use App\Services\Embedding\EmbeddingService;
+use App\Services\Ai\EmbeddingService;
 use App\Services\Joke\JokeIngestionService;
 use Laravel\Ai\Responses\Data\Meta;
 use Laravel\Ai\Responses\EmbeddingsResponse;
@@ -20,7 +20,7 @@ it('ingests jokes from enabled connectors and triggers action flow', function ()
     $serviceMock = Mockery::mock('alias:'.EmbeddingService::class);
     $serviceMock->shouldReceive('getModel')->andReturn('test-model');
     $serviceMock->shouldReceive('getColumn')->andReturn('embedding_768');
-    $serviceMock->shouldReceive('getDimension')->andReturn(768);
+    $serviceMock->shouldReceive('getDimensions')->andReturn(768);
 
     $jokeContent = new JokeContentDTO(['Why did the chicken cross the road?']);
     $jokeDTO = new JokeIngestDTO(
@@ -54,7 +54,7 @@ it('ingests jokes from enabled connectors and triggers action flow', function ()
     expect($jokeModel)->not->toBeNull();
     expect($jokeModel->status->value)->toBe(JokeStatus::PROCESSED->value);
     expect($jokeModel->embeddings)->toHaveCount(1);
-    expect($jokeModel->embeddings->first()->getAttribute(EmbeddingService::getColumn()))->toHaveCount(EmbeddingService::getDimension());
+    expect($jokeModel->embeddings->first()->getAttribute(EmbeddingService::getColumn()))->toHaveCount(EmbeddingService::getDimensions());
 });
 
 it('does not ingest from disabled connectors', function () {

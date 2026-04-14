@@ -6,7 +6,7 @@ use App\Dto\Joke\JokeIngestDTO;
 use App\Enums\Joke\JokeStatus;
 use App\Helpers\LogHelper;
 use App\Models\Joke;
-use App\Services\Embedding\EmbeddingService;
+use App\Services\Ai\EmbeddingService;
 use Illuminate\Support\Facades\DB;
 use Laravel\Ai\Responses\EmbeddingsResponse;
 use Throwable;
